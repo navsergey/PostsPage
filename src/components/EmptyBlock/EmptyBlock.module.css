@@ -1,0 +1,37 @@
+/* Empty state */
+.emptyState {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    padding: 64px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.emptyIcon {
+    width: 56px;
+    height: 56px;
+    background-color: #f3f4f6;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.emptyTitle {
+    font-size: 15px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.emptySubtitle {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
