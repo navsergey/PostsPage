@@ -1,85 +1,64 @@
 import './App.css';
 import Header from "./components/Header/Header";
-import NewPostCard from "./components/NewPostCard/NewPostCard";
+import NewPostModal from "./components/NewPostCard/NewPostModal";
 import FilterAndSearchCard from "./components/FilterAndSearchCard/FilterAndSearchCard";
 import Post from "./components/Post/Post";
-import {useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import EmptyBlock from "./components/EmptyBlock/EmptyBlock";
+import usePosts from "./hooks/usePosts";
+import PostService from "./api/PostService";
+import {getTotalPages} from "./utils/pages";
+import Pagination from "./components/Pagination/Pagination";
 
-
-const DATA = [
-    {
-        id: 1,
-        number: 1,
-        title: "Введение в React",
-        description: "Обзор библиотеки React, её основных концепций и принципов работы с компонентами."
-    },
-    {
-        id: 2,
-        number: 2,
-        title: "Основы TypeScript",
-        description: "Изучение системы типов TypeScript и её применение в современных веб-приложениях."
-    },
-    {
-        id: 3,
-        number: 3,
-        title: "Tailwind CSS",
-        description: "Утилитарный CSS-фреймворк для быстрой и гибкой стилизации интерфейсов."
-    },
-    {
-        id: 4,
-        number: 4,
-        title: "Работа с хуками",
-        description: "Глубокое погружение в useState, useEffect и кастомные хуки React."
-    },
-    {
-        id: 5,
-        number: 5,
-        title: "Управление состоянием",
-        description: "Сравнение подходов к глобальному управлению состоянием: Context API, Zustand, Redux."
-    },
-];
 
 
 function App() {
 
-    const [data, setData] = useState(DATA)
-    const [filter, setFilter] = useState({sort: 'default', query: ''})
+    const [data, setData] = useState([]);
+    const [filter, setFilter] = useState({sort: 'default', query: ''});
+    const sortedAndFilteredPosts = usePosts(data, filter.sort, filter.query);
 
-    console.log(filter)
+    const [totalPages, setTotalPages] = useState(0);
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
 
-    const sortedPosts = useMemo(() => {
-        console.log('Сработал sortedPosts')
-        if (filter.sort !== 'default') {
-            return  [...data].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]));
-        }
-        return data;
-    },[data, filter.sort])
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const sortedAndFilteredPosts = useMemo(() => {
-        console.log('Сработал sortedAndFilteredPosts');
-        if (filter.query){
-            return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
-        }
-        return sortedPosts
-    },[sortedPosts, filter.query])
+
+    const  fetchPost = async () => {
+        const response = await PostService.getPosts(limit, page);
+        const totalCount = response.headers['x-total-count'];
+        setTotalPages(getTotalPages(totalCount, limit));
+        setData(response.data);
+
+    }
+
+    useEffect(() => {
+        fetchPost();
+    }, [page]);
 
     return (
         <div className='page-container'>
             <Header/>
             <main className="main">
-                <NewPostCard data={data} setData={setData}/>
+                {isModalOpen ? <NewPostModal data={data} setData={setData} onClose={() => setIsModalOpen(false)}/>: ''}
                 <FilterAndSearchCard filter={filter}
                                      setFilter={setFilter}
                                      defaultValue={'Сортировка по:'}
                                      options={[{value: 'title', name: 'По названию'}, {
-                                         value: 'description',
+                                         value: 'body',
                                          name: 'По описанию'
                                      }]}/>
                 <div className="posts-list">
                     <div className="posts-header">
                         <div className="posts-heading">Посты</div>
                         <div className="posts-count">{data.length}</div>
+                        <button
+                            className="create-post-btn"
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            + Добавить пост
+                        </button>
                     </div>
                     {data.length === 0 ?
                         <EmptyBlock/>
@@ -88,6 +67,7 @@ function App() {
                         ))}
 
                 </div>
+                <Pagination totalPages={totalPages} currentPage={page} onPageChange={setPage} />
             </main>
         </div>
     );
