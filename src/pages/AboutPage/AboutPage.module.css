@@ -1,0 +1,135 @@
+/* About Page */
+.aboutContainer {
+    display: flex;
+    justify-content: center;
+    padding: 32px 24px;
+}
+
+.aboutCard {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.aboutHeader {
+    background-color: #f8f9fb;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.aboutTitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.aboutIcon {
+    font-size: 48px;
+    opacity: 0.8;
+}
+
+.aboutContent {
+    padding: 32px;
+}
+
+.aboutSection {
+    margin-bottom: 32px;
+}
+
+.aboutSection:last-child {
+    margin-bottom: 0;
+}
+
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 12px 0;
+}
+
+.sectionText {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin: 0;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #374151;
+}
+
+.featureIcon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+.techGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.techItem {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4f46e5;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .aboutContainer {
+        padding: 16px;
+    }
+    
+    .aboutHeader {
+        padding: 24px;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+    
+    .aboutTitle {
+        font-size: 24px;
+    }
+    
+    .aboutIcon {
+        font-size: 36px;
+    }
+    
+    .aboutContent {
+        padding: 24px;
+    }
+    
+    .sectionTitle {
+        font-size: 18px;
+    }
+    
+    .techGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

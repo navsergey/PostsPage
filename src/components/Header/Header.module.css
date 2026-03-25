@@ -9,6 +9,13 @@
     max-width: 860px;
     margin: 0 auto;
     padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerContent {
+    flex: 1;
 }
 
 .headerTitle {
@@ -21,4 +28,31 @@
     font-size: 14px;
     color: #6b7280;
     margin-top: 4px;
+}
+
+.navigation {
+    display: flex;
+    gap: 24px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.navLink:hover {
+    color: #2563eb;
+    background-color: #f0f9ff;
+    border-color: #bfdbfe;
+}
+
+.navLink:active {
+    color: #1d4ed8;
+    background-color: #dbeafe;
 }

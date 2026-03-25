@@ -20,6 +20,10 @@
     opacity: 1;
 }
 
+.postItem:hover .btnComments {
+    opacity: 1;
+}
+
 .postNumber {
     flex-shrink: 0;
     width: 40px;
@@ -61,9 +65,8 @@
     overflow: hidden;
 }
 
-.btnDelete {
+.btnBase {
     flex-shrink: 0;
-    width: 36px;
     height: 36px;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
@@ -77,7 +80,37 @@
     transition: opacity 0.2s, background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.btn-delete:hover {
+.btnDelete {
+    width: 36px;
+}
+
+.btnDelete:hover {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+    color: #ef4444;
+}
+
+.btnComments {
+    min-width: 36px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btnComments:hover {
+    background-color: #f0f9ff;
+    border-color: #bfdbfe;
+    color: #2563eb;
+}
+
+.btnComments:active {
+    background-color: #dbeafe;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+}
+
+.btnDelete:hover {
     background-color: #fef2f2;
     border-color: #fecaca;
     color: #ef4444;
